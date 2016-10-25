@@ -26,20 +26,29 @@ public class JsonWriter {
         writer.append(']');
     }
 
-    protected void writeString(String s) {
-
+    protected void writeString(String s) throws IOException {
+        writer.append('"');
+        for (int i = 0; i < s.length() - 1; i++) {
+            Character ch = s.charAt(i);
+            if (ch <= 31 || ch == '"' || ch == '/' || ch == '\\') {
+                writer.append("\\u00");
+                writer.append(Integer.toString(s.codePointAt(i), 16));
+            } else
+                writer.append(ch);
+        }
+        writer.append('"');
     }
 
-    protected void writeNumber(Number num) {
-
+    protected void writeNumber(Number num) throws IOException {
+        writer.append(num.toString());
     }
 
-    protected void writeSeparator() {
-
+    protected void writeSeparator() throws IOException {
+        writer.append(',');
     }
 
-    protected void writePropertySeparator() {
-
+    protected void writePropertySeparator() throws IOException {
+        writer.append(':');
     }
 
     protected void writeBoolean() {
