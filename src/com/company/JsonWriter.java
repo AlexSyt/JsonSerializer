@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 public class JsonWriter {
-    Writer writer;
+    protected Writer writer;
 
     public JsonWriter(Writer writer) {
         this.writer = writer;
@@ -51,15 +51,15 @@ public class JsonWriter {
         writer.append(':');
     }
 
-    protected void writeBoolean() {
-
+    protected void writeBoolean(Boolean bool) throws IOException {
+        writer.append(bool.toString());
     }
 
-    protected void writeNull() {
-
+    protected void writeNull() throws IOException {
+        writer.append("null");
     }
 
-    protected void flush() {
-
+    protected void flush() throws IOException {
+        writer.flush();
     }
 }
