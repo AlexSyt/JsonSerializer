@@ -29,10 +29,10 @@ public class JsonWriter {
     protected void writeString(String s) throws IOException {
         writer.append('"');
         for (int i = 0; i < s.length() - 1; i++) {
-            Character ch = s.charAt(i);
+            char ch = s.charAt(i);
             if (ch <= 31 || ch == '"' || ch == '/' || ch == '\\') {
                 writer.append("\\u00");
-                writer.append(Integer.toString(s.codePointAt(i), 16));
+                writer.append(Integer.toString((int) ch, 16));
             } else
                 writer.append(ch);
         }
