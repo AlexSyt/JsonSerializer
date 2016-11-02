@@ -1,5 +1,5 @@
 package com.company;
 
-public interface JsonMapper<T> {
-    void write(T obj, JsonWriter writer);
+public interface JsonMapper {
+    void write(Object obj, JsonWriter writer);
 }
