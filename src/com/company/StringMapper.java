@@ -4,11 +4,7 @@ import java.io.IOException;
 
 public class StringMapper implements JsonMapper {
     @Override
-    public void write(Object obj, JsonWriter writer) {
-        try {
-            writer.writeString((String) obj);
-        } catch (IOException e) {
-            // catch exception
-        }
+    public void write(Object obj, JsonWriter writer) throws IOException {
+        writer.writeString((String) obj);
     }
 }
