@@ -1,8 +1,6 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class ObjectArrayMapper implements JsonMapper {
     private JsonSerializer serializer;
@@ -15,11 +13,10 @@ public class ObjectArrayMapper implements JsonMapper {
     public void write(Object obj, JsonWriter writer) throws IOException {
         if (obj != null) {
             Object[] arr = (Object[]) obj;
-            Iterator iter = Arrays.asList(arr).iterator();
             writer.writeArrayBegin();
-            while (iter.hasNext()) {
-                serializer.serialize(iter.next(), writer);
-                if (iter.hasNext()) writer.writeSeparator();
+            for (int i = 0; i < arr.length; i++) {
+                serializer.serialize(arr[i], writer);
+                if (i != arr.length - 1) writer.writeSeparator();
             }
             writer.writeArrayEnd();
         } else writer.writeNull();
