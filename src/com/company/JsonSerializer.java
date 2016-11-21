@@ -4,10 +4,26 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JsonSerializer {
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
     private boolean indent;
+    private Map<Class, JsonMapper> mappersCache;
+
+    public JsonSerializer() {
+        mappersCache = new HashMap<>();
+        mappersCache.put(String.class, new StringMapper());
+        mappersCache.put(Boolean.class, new BooleanMapper());
+        mappersCache.put(Number.class, new NumberMapper());
+    }
+
+    public JsonMapper getMapper(Class clazz) {
+        if (mappersCache.containsKey(clazz))
+            return mappersCache.get(clazz);
+        else return null;
+    }
 
     public boolean isIndent() {
         return indent;
