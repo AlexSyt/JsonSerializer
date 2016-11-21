@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonSerializer {
+class JsonSerializer {
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
     private boolean indent;
     private Map<Class, JsonMapper> mappersCache;
@@ -34,6 +34,10 @@ public class JsonSerializer {
     public JsonMapper getMapper(Class clazz) {
         if (mappersCache.containsKey(clazz))
             return mappersCache.get(clazz);
+        else if (clazz.isAssignableFrom(Collection.class))
+            return mappersCache.get(Collection.class);
+        else if (clazz.isAssignableFrom(Map.class))
+            return mappersCache.get(Map.class);
         else return null;
     }
 
