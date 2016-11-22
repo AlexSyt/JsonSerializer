@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -31,12 +32,13 @@ public class JsonSerializer {
         mappersCache.put(double[].class, new PrimitiveArrayMapper(this));
     }
 
-    private JsonMapper getMapper(Class clazz) {
+    private JsonMapper getMapper(Object obj) {
+        Class clazz = obj.getClass();
         if (mappersCache.containsKey(clazz))
             return mappersCache.get(clazz);
-        else if (clazz.isAssignableFrom(Collection.class))
+        else if (obj instanceof Collection)
             return mappersCache.get(Collection.class);
-        else if (clazz.isAssignableFrom(Map.class))
+        else if (obj instanceof Map)
             return mappersCache.get(Map.class);
         else if (clazz.isArray())
             return mappersCache.get(Object[].class);
@@ -55,18 +57,20 @@ public class JsonSerializer {
         throw new IllegalStateException();
     }
 
-    public void serialize(Object obj, OutputStream stream) {
+    public void serialize(Object obj, OutputStream stream) throws IOException {
         serialize(obj, stream, DEFAULT_CHARSET);
     }
 
-    public void serialize(Object obj, OutputStream stream, Charset charset) {
+    public void serialize(Object obj, OutputStream stream, Charset charset) throws IOException {
         serialize(obj, new OutputStreamWriter(stream, charset));
     }
 
-    public void serialize(Object obj, JsonWriter jWriter) {
-
+    protected void serialize(Object obj, JsonWriter jWriter) throws IOException {
+        JsonMapper mapper = getMapper(obj);
+        mapper.write(obj, jWriter);
     }
 
-    public void serialize(Object obj, Writer writer) {
+    public void serialize(Object obj, Writer writer) throws IOException {
+        serialize(obj, new JsonWriter(writer));
     }
 }
