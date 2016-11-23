@@ -19,6 +19,7 @@ public class JsonSerializer {
         mappersCache.put(String.class, new StringMapper());
         mappersCache.put(Boolean.class, new BooleanMapper());
         mappersCache.put(Number.class, new NumberMapper());
+        mappersCache.put(Character.class, new CharacterMapper());
         mappersCache.put(Collection.class, new CollectionMapper(this));
         mappersCache.put(Map.class, new MapMapper(this));
         mappersCache.put(Object[].class, new ObjectArrayMapper(this));
