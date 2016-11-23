@@ -28,7 +28,7 @@ public class JsonWriter {
 
     protected void writeString(String s) throws IOException {
         writer.append('"');
-        for (int i = 0; i < s.length() - 1; i++) {
+        for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
             if (ch <= 31 || ch == '"' || ch == '/' || ch == '\\') {
                 writer.append("\\u00");
