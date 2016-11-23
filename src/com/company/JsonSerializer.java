@@ -36,6 +36,8 @@ public class JsonSerializer {
         Class clazz = obj.getClass();
         if (mappersCache.containsKey(clazz))
             return mappersCache.get(clazz);
+        else if (obj instanceof Number)
+            return mappersCache.get(Number.class);
         else if (obj instanceof Collection)
             return mappersCache.get(Collection.class);
         else if (obj instanceof Map)
