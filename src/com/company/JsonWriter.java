@@ -10,23 +10,23 @@ public class JsonWriter {
         this.writer = writer;
     }
 
-    protected void writeObjectBegin() throws IOException {
+    public void writeObjectBegin() throws IOException {
         writer.append('{');
     }
 
-    protected void writeObjectEnd() throws IOException {
+    public void writeObjectEnd() throws IOException {
         writer.append('}');
     }
 
-    protected void writeArrayBegin() throws IOException {
+    public void writeArrayBegin() throws IOException {
         writer.append('[');
     }
 
-    protected void writeArrayEnd() throws IOException {
+    public void writeArrayEnd() throws IOException {
         writer.append(']');
     }
 
-    protected void writeString(String s) throws IOException {
+    public void writeString(String s) throws IOException {
         writer.append('"');
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
@@ -39,27 +39,27 @@ public class JsonWriter {
         writer.append('"');
     }
 
-    protected void writeNumber(Number num) throws IOException {
+    public void writeNumber(Number num) throws IOException {
         writer.append(num.toString());
     }
 
-    protected void writeSeparator() throws IOException {
+    public void writeSeparator() throws IOException {
         writer.append(',');
     }
 
-    protected void writePropertySeparator() throws IOException {
+    public void writePropertySeparator() throws IOException {
         writer.append(':');
     }
 
-    protected void writeBoolean(Boolean bool) throws IOException {
+    public void writeBoolean(Boolean bool) throws IOException {
         writer.append(bool.toString());
     }
 
-    protected void writeNull() throws IOException {
+    public void writeNull() throws IOException {
         writer.append("null");
     }
 
-    protected void flush() throws IOException {
+    public void flush() throws IOException {
         writer.flush();
     }
 }

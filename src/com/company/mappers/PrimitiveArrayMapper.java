@@ -1,4 +1,7 @@
-package com.company;
+package com.company.mappers;
+
+import com.company.JsonSerializer;
+import com.company.JsonWriter;
 
 import java.io.IOException;
 import java.lang.reflect.Array;

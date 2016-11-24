@@ -1,12 +1,14 @@
-package com.company;
+package com.company.mappers;
+
+import com.company.JsonWriter;
 
 import java.io.IOException;
 
-public class CharacterMapper implements JsonMapper {
+public class BooleanMapper implements JsonMapper {
     @Override
     public void write(Object obj, JsonWriter writer) throws IOException {
         if (obj != null)
-            writer.writeString(obj.toString());
+            writer.writeBoolean((Boolean) obj);
         else writer.writeNull();
     }
 }

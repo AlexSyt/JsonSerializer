@@ -1,4 +1,6 @@
-package com.company;
+package com.company.mappers;
+
+import com.company.JsonWriter;
 
 import java.io.IOException;
 

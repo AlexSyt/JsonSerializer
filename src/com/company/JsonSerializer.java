@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.mappers.*;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -68,7 +70,7 @@ public class JsonSerializer {
         serialize(obj, new OutputStreamWriter(stream, charset));
     }
 
-    protected void serialize(Object obj, JsonWriter jWriter) throws IOException {
+    public void serialize(Object obj, JsonWriter jWriter) throws IOException {
         JsonMapper mapper = getMapper(obj);
         mapper.write(obj, jWriter);
     }
