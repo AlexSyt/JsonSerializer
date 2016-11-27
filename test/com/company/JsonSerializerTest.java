@@ -1,17 +1,16 @@
 package com.company;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.testng.AssertJUnit.assertEquals;
-
+import static org.junit.Assert.assertEquals;
 
 public class JsonSerializerTest {
     @Test
-    public void testSerialize() throws Exception {
+    public void serialize() throws Exception {
         JsonSerializer ser = new JsonSerializer();
         Integer[] arr = {1, 2, 3, 4, 5};
         ArrayList<Integer> toSer = new ArrayList<>(Arrays.asList(arr));
