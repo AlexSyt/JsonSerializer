@@ -2,21 +2,18 @@ package com.company;
 
 import com.company.mappers.*;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JsonSerializer {
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
     private boolean indent;
     private Map<Class, JsonMapper> mappersCache;
 
-    public JsonSerializer() {
+    JsonSerializer() {
         mappersCache = new HashMap<>();
         mappersCache.put(String.class, new StringMapper());
         mappersCache.put(Boolean.class, new BooleanMapper());
@@ -58,8 +55,10 @@ public class JsonSerializer {
         this.indent = indent;
     }
 
-    public String serialize(Object obj) {
-        throw new IllegalStateException();
+    public String serialize(Object obj) throws IOException {
+        StringWriter sw = new StringWriter();
+        serialize(obj, new JsonWriter(sw));
+        return sw.toString();
     }
 
     public void serialize(Object obj, OutputStream stream) throws IOException {
