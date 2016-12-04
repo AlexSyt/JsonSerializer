@@ -8,11 +8,11 @@ import java.lang.reflect.Field;
 
 public class PojoMapper implements JsonMapper {
     private JsonSerializer serializer;
-    private Field[] fields;
+    private final Field[] fields;
 
-    public PojoMapper(JsonSerializer serializer, Object object) {
+    public PojoMapper(JsonSerializer serializer, Class clazz) {
         this.serializer = serializer;
-        fields = object.getClass().getDeclaredFields();
+        fields = clazz.getDeclaredFields();
     }
 
     @Override
