@@ -6,6 +6,7 @@ import com.company.JsonWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PojoMapper implements JsonMapper {
     private JsonSerializer serializer;
@@ -14,10 +15,8 @@ public class PojoMapper implements JsonMapper {
     public PojoMapper(JsonSerializer serializer, Class clazz) {
         this.serializer = serializer;
         ArrayList<Field> f = new ArrayList<>();
-        for (Class cur = clazz; cur != Object.class; cur = cur.getSuperclass()) {
-            for (Field field : cur.getDeclaredFields())
-                f.add(field);
-        }
+        for (Class cur = clazz; cur != Object.class; cur = cur.getSuperclass())
+            Collections.addAll(f, cur.getDeclaredFields());
         fields = f;
     }
 
