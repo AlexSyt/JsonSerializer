@@ -44,7 +44,11 @@ public class JsonSerializer {
             return mappersCache.get(Map.class);
         else if (clazz.isArray())
             return mappersCache.get(Object[].class);
-        else throw new RuntimeException("wtf");
+        else {
+            PojoMapper res = new PojoMapper(this, clazz);
+            mappersCache.put(clazz, res);
+            return res;
+        }
     }
 
     public boolean isIndent() {
