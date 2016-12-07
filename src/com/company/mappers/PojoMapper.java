@@ -30,7 +30,7 @@ public class PojoMapper implements JsonMapper {
                 writer.writeString(f.getName());
                 writer.writePropertySeparator();
                 try {
-                    serializer.serialize(f.get(obj));
+                    serializer.serialize(f.get(obj), writer);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
