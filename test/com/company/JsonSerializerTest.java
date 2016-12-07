@@ -14,7 +14,7 @@ public class JsonSerializerTest {
         Gson gson = new Gson();
 
         Integer[] arrInt1 = {1, 2, 3, 4, 5};
-        Integer[] arrInt2 = {11, 22, 33, 44, 55};
+        Integer[] arrInt2 = {11, null, 33, 44, 55};
         Integer[] arrInt3 = {111, 222, 333, 444, 555};
 
         ArrayList<Integer[]> list1 = new ArrayList<>();
@@ -30,11 +30,11 @@ public class JsonSerializerTest {
         list2.add(arrInt11);
         list2.add(arrInt12);
         list2.add(arrInt13);
+        list2.add(null);
 
         Map<String, ArrayList<Integer[]>> mapTest = new HashMap<>();
         mapTest.put("list1", list1);
         mapTest.put("list2", list2);
-
 
 
         List<Map<String, LinkedList<Double[]>>> listTest = new ArrayList<>();
@@ -42,7 +42,7 @@ public class JsonSerializerTest {
         Double[] arrD1 = {1.5, 2.5, 3.5};
         Double[] arrD2 = {2.5, 3.5, 4.5};
         Double[] arrD11 = {3.5, 4.5, 5.5};
-        Double[] arrD22 = {4.5, 5.5, 6.5};
+        Double[] arrD22 = {null, 5.5, 6.5};
 
         LinkedList<Double[]> l1 = new LinkedList<>();
         LinkedList<Double[]> l2 = new LinkedList<>();
