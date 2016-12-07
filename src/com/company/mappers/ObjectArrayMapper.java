@@ -18,7 +18,10 @@ public class ObjectArrayMapper implements JsonMapper {
             Object[] arr = (Object[]) obj;
             writer.writeArrayBegin();
             for (int i = 0; i < arr.length; i++) {
-                serializer.serialize(arr[i], writer);
+                Object forSer = arr[i];
+                if (forSer != null)
+                    serializer.serialize(forSer, writer);
+                else writer.writeNull();
                 if (i != arr.length - 1) writer.writeSeparator();
             }
             writer.writeArrayEnd();

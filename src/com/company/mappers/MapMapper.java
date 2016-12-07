@@ -24,7 +24,10 @@ public class MapMapper implements JsonMapper {
                 Map.Entry entry = (Map.Entry) iter.next();
                 writer.writeString((String) entry.getKey());
                 writer.writePropertySeparator();
-                serializer.serialize(entry.getValue(), writer);
+                Object forSer = entry.getValue();
+                if (forSer != null)
+                    serializer.serialize(forSer, writer);
+                else writer.writeNull();
                 if (iter.hasNext()) writer.writeSeparator();
             }
             writer.writeObjectEnd();

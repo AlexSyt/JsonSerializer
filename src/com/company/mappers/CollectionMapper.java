@@ -21,7 +21,10 @@ public class CollectionMapper implements JsonMapper {
             Iterator iter = coll.iterator();
             writer.writeArrayBegin();
             while (iter.hasNext()) {
-                serializer.serialize(iter.next(), writer);
+                Object forSer = iter.next();
+                if (forSer != null)
+                    serializer.serialize(forSer, writer);
+                else writer.writeNull();
                 if (iter.hasNext()) writer.writeSeparator();
             }
             writer.writeArrayEnd();

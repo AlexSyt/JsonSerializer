@@ -19,7 +19,10 @@ public class PrimitiveArrayMapper implements JsonMapper {
             int size = Array.getLength(obj);
             writer.writeArrayBegin();
             for (int i = 0; i < size; i++) {
-                serializer.serialize(Array.get(obj, i), writer);
+                Object forSer = Array.get(obj, i);
+                if (forSer != null)
+                    serializer.serialize(forSer, writer);
+                else writer.writeNull();
                 if (i != size - 1) writer.writeSeparator();
             }
             writer.writeArrayEnd();
