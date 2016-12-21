@@ -7,6 +7,28 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
+class TestItem {
+    private int testData;
+    int[] testArray;
+
+    public TestItem(int testData, int[] testArray) {
+        this.testData = testData;
+        this.testArray = testArray;
+    }
+
+    public int getTestData() {
+        return ++testData;
+    }
+
+    public void setTestData(int testData) {
+        this.testData = testData;
+    }
+
+    public Calendar getCalendar() {
+        return Calendar.getInstance();
+    }
+}
+
 public class JsonSerializerTest {
     @Test
     public void serialize() throws Exception {
@@ -59,5 +81,8 @@ public class JsonSerializerTest {
 
         assertEquals(gson.toJson(mapTest), ser.serialize(mapTest));
         assertEquals(gson.toJson(listTest), ser.serialize(listTest));
+
+        TestItem testItem = new TestItem(3, new int[]{1, 2, 3, 4, 5, 6, 7});
+        assertEquals(gson.toJson(testItem), ser.serialize(testItem));
     }
 }
