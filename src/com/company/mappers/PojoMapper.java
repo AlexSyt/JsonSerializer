@@ -1,5 +1,6 @@
 package com.company.mappers;
 
+import com.company.Ignore;
 import com.company.JsonSerializer;
 import com.company.JsonWriter;
 
@@ -14,10 +15,13 @@ public class PojoMapper implements JsonMapper {
 
     public PojoMapper(JsonSerializer serializer, Class clazz) {
         this.serializer = serializer;
+        fields = new ArrayList<>();
         ArrayList<Field> f = new ArrayList<>();
         for (Class cur = clazz; cur != Object.class; cur = cur.getSuperclass())
             Collections.addAll(f, cur.getDeclaredFields());
-        fields = f;
+        f.stream()
+                .filter((field) -> !field.isAnnotationPresent(Ignore.class))
+                .forEach(fields::add);
     }
 
     @Override
