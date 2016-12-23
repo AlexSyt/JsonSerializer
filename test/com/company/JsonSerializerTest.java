@@ -1,6 +1,8 @@
 package com.company;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import org.junit.Test;
 
 import java.util.*;
@@ -8,7 +10,9 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 class TestItem {
+    @Expose
     private int testData;
+    @Ignore
     int[] testArray;
 
     public TestItem(int testData, int[] testArray) {
@@ -33,7 +37,7 @@ public class JsonSerializerTest {
     @Test
     public void serialize() throws Exception {
         JsonSerializer ser = new JsonSerializer();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
         Integer[] arrInt1 = {1, 2, 3, 4, 5};
         Integer[] arrInt2 = {11, null, 33, 44, 55};
